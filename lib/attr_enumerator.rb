@@ -14,7 +14,7 @@ module AttrEnumerator
       validates_inclusion_of attribute, options.merge(:in => choices)
 
       choices.each do |choice|
-        choice_string = prefix + choice.to_s.underscore.parameterize('_')
+        choice_string = prefix + choice.to_s.underscore.parameterize(separator: '_')
         define_method(choice_string + '?') { send(attribute) == choice }
         scope choice_string, lambda { where(attribute => choice) } if respond_to? :scope
       end
